@@ -59,4 +59,43 @@ public class AdminController {
 	}
 	
 	
+	@RequestMapping("/fees")
+	public String onFees(@RequestParam("id") int id,Model m) {
+		Student s=ssi.getStudent(id);
+		m.addAttribute("st", s);
+		return "fees";
+	}
+	
+	@RequestMapping("/payfees")
+	public String PayFees(@RequestParam("studentid") int id,@RequestParam("ammount") float amt,Model m) {
+	
+		List<Student> list=ssi.updateStudentFees(id,amt);
+		m.addAttribute("data", list);
+		return "adminscreen";
+	}
+	
+	
+	@RequestMapping("/remove")
+	public String removeDelete(@RequestParam("id") int id,Model m) {
+		
+		       ssi.removeStudent(id);
+		
+		List<Student> list=ssi.getAllStudents();
+		m.addAttribute("data",list);
+		return "adminscreen";
+	}
+	
+	@RequestMapping("/paging")
+	public String paging(@RequestParam("pageNo") int pageNo,Model m) {
+		
+
+		List<Student> list=ssi.paging(pageNo,2);
+		m.addAttribute("data",list);
+		return "adminscreen";
+	}
+	
+	
+	
+	
+	
 }

@@ -35,7 +35,17 @@ form {
 	background-repeat: no-repeat;
 }
 </style>
+<script type="text/javascript">
+   function fees() {
+	document.fn.action="fees";
+	document.fn.submit();
+    }
+   function remove() {
+		document.fn.action="remove";
+		document.fn.submit();
+	}
 
+</script>
 </head>
 <body>
 	<div class="card">
@@ -175,50 +185,63 @@ form {
 					<h1 style="color: red;">${message }</h1>
 				</marquee>
 			</div>
-			<table class="table table-hover" style="font-size: small">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Student Name</th>
-						<th>Student Email</th>
-						<th>Age</th>
-						<th>Collage Name</th>
-						<th>Course Name</th>
-						<th>Bath No</th>
-						<th>Mode</th>
-						<th>Fess Recived</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${data}" var="s">
-						<tr>
-							<td>${s.studentId}</td>
-							<td>${s.studentFullName}</td>
-							<td>${s.studentEmail}</td>
-							<td>${s.studentAge}</td>
-							<td>${s.studentCollageName}</td>
-							<td>${s.studentCourse}</td>
-							<td>${s.batchNumber}</td>
-							<td>${s.batchMode}</td>
-							<td>${s.feesPaid}</td>
-							<td>
-								<div class="btn-group btn-group-sm" role="group"
-									aria-label="...">
-									<button class="btn btn-outline-success">PayFees</button>
-									<button class="btn btn-outline-primary">ShiftBatch</button>
-									<button class="btn btn-outline-danger">Remove</button>
-
-								</div>
-
-							</td>
-
-						</tr>
-					</c:forEach>
-
-				</tbody>
-
-			</table>
+			<form name="fn">
+ <table class="table table-hover" style="font-size: small">
+ <thead>
+ <tr>
+ <th>ID</th>
+ <th>Student Name</th>
+ <th>Student Email</th>
+ <th>Age</th>
+ <th>Collage Name</th>
+ <th>Course Name</th>
+ <th>Bath No</th>
+ <th>Mode</th>
+ <th>Fess Recived</th>
+ <th>Select</th>
+ <th>Actions</th>
+ </tr>
+ </thead>
+ <tbody>
+ <c:forEach items="${data}" var="s">
+ <tr>
+ <td>${s.studentId}</td>
+ <td>${s.studentFullName}</td>
+ <td>${s.studentEmail}</td>
+ <td>${s.studentAge}</td>
+ <td>${s.studentCollageName}</td>
+ <td>${s.studentCourse}</td>
+ <td>${s.batchNumber}</td>
+ <td>${s.batchMode}</td>
+ <td>${s.feesPaid}</td>
+ <td>
+ <input type="radio" name="id" value="${s.studentId}">
+ </td>
+ <td>
+ <div class="btn-group btn-group-sm" role="group" aria-label="...">
+ <button class="btn btn-outline-success" onclick="fees()">Pay-Fees</button>
+ <button class="btn btn-outline-primary" onclick="batch()">Shift-Batch</button>
+ <button class="btn btn-outline-danger" onclick="remove()">Remove</button>
+ </div>
+ 
+ </td>
+ 
+ </tr>
+ </c:forEach>
+ 
+ </tbody>
+ 
+ </table>
+ </form>
+<nav aria-label="...">
+  <ul class="pagination pagination-lg">
+    <li class="page-item">
+      <a class="page-link" href="paging?pageNo=0" tabindex="-1">1</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="paging?pageNo=1">2</a></li>
+    <li class="page-item"><a class="page-link" href="paging?pageNo=2">3</a></li>
+  </ul>
+</nav>
 		</section>
 	</div>
 
